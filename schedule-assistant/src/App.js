@@ -22,10 +22,14 @@ const App = () => {
     },
   ]);
 
+const onDelete = (id) => {
+  console.log(id);
+}
+
   return (
     <div className="container">
       <Header/>
-      <Tasks tasks={tasks}/>
+      <Tasks tasks={tasks} onDelete={onDelete}/>
     </div>
   )
 }
