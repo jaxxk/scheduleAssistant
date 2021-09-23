@@ -7,38 +7,29 @@ import {useState} from 'react'
 
 const App = () => {
   
-  const [showTimer, setShowTimer] = useState(false)
   const [tasks,setTasks] = useState( [
     {
         id: 1,
         text: "appointment",
         time: "3 hours",
-        start:false,
+        reminder:true,
     },
     {
         id: 2,
         text: "doc appointment",
         time: "3 hours",
-        start:false,
+        reminder:false,
     },
   ]);
 
-const onDelete = (id) => {
-  setTasks(tasks.filter((task) => (task.id !== id))) ;
-}
-
-const startTask = (id) => {
-  setTasks(tasks.map((task) => (
-    task.id === id ? {...task, start:!task.start} : task
-  )))
-
+const deleteTask = (id) => {
+  console.log(id);
 }
 
   return (
     <div className="container">
       <Header/>
-      <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask}/>
-      {showTimer ? <Countdown/> : ''}
+      <Tasks tasks={tasks} onDelete={deleteTask}/>
     </div>
   )
 }
