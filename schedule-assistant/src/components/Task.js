@@ -1,9 +1,14 @@
 import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 
-const Task = ({task,onDelete}) => {
+const Task = ({task,onDelete,startTask}) => {
+    
+    const startTimer = () => {
+        startTask(task.id)
+    }
+    
     return (
-        <div className='task'>
+        <div className={`task  ${task.start ? "start" : ''}`} onDoubleClick={() => startTimer()}>
             <h3>
                 {task.text}
                 <FaTimes style={{color:
