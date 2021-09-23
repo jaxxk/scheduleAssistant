@@ -21,6 +21,8 @@ const Task = ({task,onDelete,startTask}) => {
     };
 
     const convertTime = (time) => {
+        
+        
         let hour = parseInt(time.slice(0,2))*60*60*1000;
         let mins = parseInt(time.slice(2,4))*60*1000;
         let seconds = parseInt(time.slice(4,6))*1000;
