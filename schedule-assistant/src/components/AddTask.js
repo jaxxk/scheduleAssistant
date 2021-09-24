@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
+import TimePicker from 'react-time-picker-input';
 const AddTask = ({onAdd}) => {
    const [text,setText] = useState('')
    const [time,setTime] = useState('')
@@ -28,11 +29,16 @@ const AddTask = ({onAdd}) => {
          </div>
          
          <div className="form-control">
-            <label>Time</label>
+            {/* <label>Time</label>
             <input type="text" placeholder="Add Date and Time"
-             value={time} onChange={(e) => setTime(e.target.value)}/>            
+             value={time} onChange={(e) => setTime(e.target.value)}/>             */}
+            <TimePicker
+                onChange={(newValue)=>setTime(newValue)}
+                value={time}
+            />
          </div>
-         
+
+
          <input type="submit" value='Save Task' className='btn btn-block'></input>
       </form>
    )

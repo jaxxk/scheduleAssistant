@@ -11,13 +11,13 @@ const App = () => {
     {
         id: 1,
         text: "appointment",
-        time: "0:0:5",
+        time: "00:05",
         start:false,
     },
     {
         id: 2,
         text: "doc appointment",
-        time: "0:4:10",
+        time: "04:10",
         start:false,
     },
   ]);
