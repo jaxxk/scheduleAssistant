@@ -10,7 +10,7 @@ const Task = ({task,onDelete,startTask}) => {
     }
 
     // Renderer callback with condition
-    const renderer = ({ minutes, seconds, completed }) => {
+    const renderer = ({minutes, seconds,completed }) => {
         if (completed) {
             // Render a completed state
             return null
@@ -22,7 +22,7 @@ const Task = ({task,onDelete,startTask}) => {
 
     const convertTime = (time) => {
         let hour = parseInt(time.slice(0,2))*1000*60
-        let minute = parseInt(time.slice(4,6))*1000
+        let minute = parseInt(time.slice(3,6))*1000
         time = hour + minute
         return time;
     }

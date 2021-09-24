@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
-import TimePicker from 'react-time-picker-input';
+import TimeInput from 'react-time-picker-input'
 const AddTask = ({onAdd}) => {
    const [text,setText] = useState('')
    const [time,setTime] = useState('')
@@ -11,6 +11,10 @@ const AddTask = ({onAdd}) => {
 
       if(!text){
          alert('Please add text')
+         return
+      }
+      if(time === "00:00"){
+         alert('Please add time')
          return
       }
 
@@ -32,8 +36,8 @@ const AddTask = ({onAdd}) => {
             {/* <label>Time</label>
             <input type="text" placeholder="Add Date and Time"
              value={time} onChange={(e) => setTime(e.target.value)}/>             */}
-            <TimePicker
-                onChange={(newValue)=>setTime(newValue)}
+            <TimeInput
+                eachInputDropdown onChange={(newValue)=>setTime(newValue)}
                 value={time}
             />
          </div>
