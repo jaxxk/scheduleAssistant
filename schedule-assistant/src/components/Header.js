@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from './Button'
 
-const Header = ({onAdd,showAdd,disableAddtask}) => {
+const Header = ({onAdd,showAdd,disableAdd}) => {
    
    return (
       <header className = "header">
          Schedule planner 
-         <Button color={showAdd ? 'red' : "green"} text={showAdd ? 'Close' : 'Add Task'} disabled={disableAddtask} onClick={onAdd}/>
+         <Button color={showAdd ? 'red' : "green"} text={showAdd ? 'Close' : 'Add Task'} disableAdd={disableAdd} onClick={onAdd}/>
       </header>
    )
 }

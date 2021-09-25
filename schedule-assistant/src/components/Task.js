@@ -2,9 +2,10 @@ import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 import Countdown from 'react-countdown';
 
-const Task = ({task,onDelete,startTask}) => {
+const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
 
     const startTimer = () => {
+        setdisable(!disableAddTask) 
         startTask(task.id)
     }
 
@@ -31,10 +32,12 @@ const Task = ({task,onDelete,startTask}) => {
         return time;
     }
 
-    const pauseTimer = () =>{
-        // onClick={() => }
-        
-    }
+    // const pauseTimer = () =>{
+    //     // onClick={() => }
+
+    // }
+
+
 
     const countDownTimer = <Countdown
     date={Date.now() + convertTime(task.time)}
