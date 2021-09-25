@@ -24,6 +24,11 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
         return countDownTimer
     }
 
+    const timerOnComplete = () => {
+        onDelete(task.id)
+        setdisable(!disableAddTask) 
+
+    }
 
     const convertTime = (time) => {
         let hour = parseInt(time.slice(0,2))*1000*60
@@ -42,7 +47,7 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
     const countDownTimer = <Countdown
     date={Date.now() + convertTime(task.time)}
     renderer={renderer}
-    onComplete={() => onDelete(task.id)}/>
+    onComplete={timerOnComplete}/>
 
 
     return (
