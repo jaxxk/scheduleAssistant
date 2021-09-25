@@ -7,6 +7,7 @@ import {useState} from 'react'
 
 const App = () => {
   const [showAddTask,setAddTasks] = useState(false);
+  const [disableAddTask,setdisableAddTasks]= useState(true);
   const [tasks,setTasks] = useState( [
     {
         id: 1,
@@ -41,7 +42,7 @@ const onAdd = (task) => {
 
   return (
     <div className="container">
-      <Header onAdd={() => setAddTasks(!showAddTask)} showAdd={showAddTask}/>
+      <Header onAdd={() => setAddTasks(!showAddTask)} showAdd={showAddTask} disableAddTask={disableAddTask}/>
       <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask}/>
       {showAddTask && <AddTask onAdd={onAdd}/>}
     </div>
