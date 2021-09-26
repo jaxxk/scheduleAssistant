@@ -27,21 +27,14 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
     const timerOnComplete = () => {
         onDelete(task.id)
         setdisable(!disableAddTask) 
-
+            
     }
 
     const convertTime = (time) => {
-        let hour = parseInt(time.slice(0,2))*1000*60
-        let minute = parseInt(time.slice(3,6))*1000
-        time = hour + minute
+        let hour = parseInt(time)*1000*60
+        time = hour
         return time;
     }
-
-    // const pauseTimer = () =>{
-    //     // onClick={() => }
-
-    // }
-
 
 
     const countDownTimer = <Countdown
@@ -58,7 +51,7 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
                 'red', cursor:'pointer'}} onClick={() => onDelete(task.id)}/> 
                 {/* //state gets passed down and "actions gets passed up */}
             </h3>
-            {task.start ? addCountdownTimer(task): <p>Scheduled time: {task.time}</p>}
+            {task.start ? addCountdownTimer(task): <p>Scheduled time: {task.time + " mins"}</p>}
 
         </div>
     )

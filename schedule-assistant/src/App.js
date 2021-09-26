@@ -12,13 +12,13 @@ const App = () => {
     {
         id: 1,
         text: "appointment",
-        time: "00:05",
+        time: "5",
         start:false,
     },
     {
         id: 2,
         text: "doc appointment",
-        time: "04:10",
+        time: "1",
         start:false,
     },
   ]);
@@ -44,7 +44,7 @@ const onAdd = (task) => {
     <div className="container">
       <Header onAdd={() => setAddTasks(!showAddTask)} showAdd={showAddTask} disableAdd={disableAddTask}/>
       <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask} setdisable={setdisableAddTasks} disableAddTask={disableAddTask}/>
-      {showAddTask && <AddTask onAdd={onAdd}/>}
+      {(showAddTask && !disableAddTask) ? <AddTask onAdd={onAdd}/> : ""}
     </div>
   )
 }
