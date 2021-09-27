@@ -20,9 +20,6 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
         }
     };
 
-    const addCountdownTimer = (task) => {
-        return countDownTimer
-    }
 
     const timerOnComplete = () => {
         onDelete(task.id)
@@ -37,21 +34,19 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
     }
 
 
-    const countDownTimer = <Countdown
-    date={Date.now() + convertTime(task.time)}
-    renderer={renderer}
-    onComplete={timerOnComplete}/>
-
-
     return (
         <div className={`task  ${task.start ? "start" : ''}`} onDoubleClick={() => startTimer()} >
+
             <h3>
                 {task.text}
                 <FaTimes style={{color:
                 'red', cursor:'pointer'}} onClick={() => onDelete(task.id)}/> 
                 {/* //state gets passed down and "actions gets passed up */}
             </h3>
-            {task.start ? addCountdownTimer(task): <p>Scheduled time: {task.time + " mins"}</p>}
+            {task.start ? <Countdown
+            date={Date.now() + convertTime(task.time)}
+            renderer={renderer}
+            onComplete={timerOnComplete}/>: <p>Scheduled time: {task.time + " mins"}</p>}
 
         </div>
     )
