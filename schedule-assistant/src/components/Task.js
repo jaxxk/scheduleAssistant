@@ -3,7 +3,7 @@ import { FaTimes } from 'react-icons/fa'
 import Countdown from 'react-countdown';
 import {useRef} from 'react'
 
-const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
+const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,finish,setFinish}) => {
     const clockref = useRef()
     const startTimer = () => {
         setdisable(!disableAddTask) 
@@ -32,24 +32,26 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
         return time;
     }
 
-    let timer = <Countdown
-    date={Date.now() + convertTime(task.time)}
-    renderer={renderer}
-    onComplete={timerOnComplete} ref = {clockref}/>
+
+    const pauseHandler = () => clockref.current.start();
 
 
 
     return (
         <div className={`task  ${task.start ? "start" : ''}`} onDoubleClick={() => startTimer()} >
-
+            
             <h3>
                 {task.text}
                 <FaTimes style={{color:
                 'red', cursor:'pointer'}} onClick={() => onDelete(task.id)}/> 
                 {/* //state gets passed down and "actions gets passed up */}
             </h3>
-            {task.start ? timer : <p>Scheduled time: {task.time + " mins"}</p>}
-
+            {task.start ? 
+                <Countdown
+                date={Date.now() + convertTime(task.time)}
+                renderer={renderer}
+                onComplete={timerOnComplete} ref = {clockref}/> : <p>Scheduled time: {task.time + " mins"}</p>}
+            {pause ? pauseHandler() : ''}
         </div>
     )
 }

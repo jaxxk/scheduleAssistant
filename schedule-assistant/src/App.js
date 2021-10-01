@@ -22,6 +22,8 @@ const App = () => {
         start:false,
     },
   ]);
+  const [timerPause,setTimerPause]= useState(false);
+  const [timerFinish,setTimerFinish]= useState(false);
 
 const onDelete = (id) => {
   setTasks(tasks.filter((task) => (task.id !== id))) ;
@@ -44,7 +46,9 @@ const onAdd = (task) => {
     <div className='container'>
       <div>
         <Header onAdd={() => setAddTasks(!showAddTask)} showAdd={showAddTask} disableAdd={disableAddTask}/>
-        <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask} setdisable={setdisableAddTasks} disableAddTask={disableAddTask}/>
+        <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask} setdisable={setdisableAddTasks} disableAddTask={disableAddTask}
+         pause={timerPause} setPause={setTimerPause} finish={timerFinish} setFinish={setTimerFinish}
+        />
         {(showAddTask && !disableAddTask) ? <AddTask onAdd={onAdd}/> : ""}
       </div>
     </div>
