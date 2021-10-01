@@ -14,6 +14,11 @@
   border-radius: 5px;
 }
 
+.freeze {
+  pointer-events:none;
+}
+
+
 /* header class */
 .header {
   display: flex;

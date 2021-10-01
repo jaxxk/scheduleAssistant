@@ -41,11 +41,14 @@ const onAdd = (task) => {
 }
 
   return (
-    <div className="container">
-      <Header onAdd={() => setAddTasks(!showAddTask)} showAdd={showAddTask} disableAdd={disableAddTask}/>
-      <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask} setdisable={setdisableAddTasks} disableAddTask={disableAddTask}/>
-      {(showAddTask && !disableAddTask) ? <AddTask onAdd={onAdd}/> : ""}
+    <div className='container'>
+      <div>
+        <Header onAdd={() => setAddTasks(!showAddTask)} showAdd={showAddTask} disableAdd={disableAddTask}/>
+        <Tasks tasks={tasks} onDelete={onDelete} startTask={startTask} setdisable={setdisableAddTasks} disableAddTask={disableAddTask}/>
+        {(showAddTask && !disableAddTask) ? <AddTask onAdd={onAdd}/> : ""}
+      </div>
     </div>
+
   )
 }
 

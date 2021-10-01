@@ -1,9 +1,10 @@
 import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 import Countdown from 'react-countdown';
+import {useRef} from 'react'
 
 const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
-
+    const clockref = useRef()
     const startTimer = () => {
         setdisable(!disableAddTask) 
         startTask(task.id)
@@ -19,8 +20,6 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
             return <span>{minutes}:{seconds}</span>;
         }
     };
-
-
     const timerOnComplete = () => {
         onDelete(task.id)
         setdisable(!disableAddTask) 
@@ -33,6 +32,12 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
         return time;
     }
 
+    let timer = <Countdown
+    date={Date.now() + convertTime(task.time)}
+    renderer={renderer}
+    onComplete={timerOnComplete} ref = {clockref}/>
+
+
 
     return (
         <div className={`task  ${task.start ? "start" : ''}`} onDoubleClick={() => startTimer()} >
@@ -43,10 +48,7 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask}) => {
                 'red', cursor:'pointer'}} onClick={() => onDelete(task.id)}/> 
                 {/* //state gets passed down and "actions gets passed up */}
             </h3>
-            {task.start ? <Countdown
-            date={Date.now() + convertTime(task.time)}
-            renderer={renderer}
-            onComplete={timerOnComplete}/>: <p>Scheduled time: {task.time + " mins"}</p>}
+            {task.start ? timer : <p>Scheduled time: {task.time + " mins"}</p>}
 
         </div>
     )
