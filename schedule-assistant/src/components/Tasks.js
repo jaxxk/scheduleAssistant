@@ -10,7 +10,7 @@ const Tasks = ({tasks,onDelete,startTask,setdisable,disableAddTask,pause,setPaus
                pause={pause} setPause={setPause} finish={finish} setFinish={setFinish}/>
             ))} 
          </div>
-         <Button text={"Pause"} onClick={() => setPause(true)}/>
+         <Button text={pause ? "Resume" : "Pause"} onClick={() => setPause(!pause)}/>
       </div>
    )
 }
