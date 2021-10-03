@@ -14,6 +14,7 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,
     const renderer = ({minutes, seconds,completed,api}) => {
         if (completed) {
             // Render a completed state
+  
             return null
         }else if (api.isPaused() === true && pause === true){
             return <span>Paused</span>
