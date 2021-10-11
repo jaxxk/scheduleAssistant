@@ -20,6 +20,7 @@
     "react-time-picker-input": "^2.0.2",
     "react-transition-group": "^4.4.2",
     "soundmanager2": "^2.97.20170602",
+    "use-sound": "^4.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

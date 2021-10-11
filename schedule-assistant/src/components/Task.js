@@ -1,10 +1,16 @@
 import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 import Countdown from 'react-countdown';
-import {useRef} from 'react'
+import {useRef,useState} from 'react'
+import useSound from 'use-sound';
+import boopSfx from '../sounds/music.mp3';
 
 const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,finish,setFinish}) => {
     const clockRef = useRef();
+    const volume = .5;
+    const [playMusic,setPlayMusic] = useState(true);
+    const [play,{stop}] = useSound(boopSfx,volume);
+    
     const startTimer = () => {
         setdisable(!disableAddTask) 
         startTask(task.id)
@@ -14,14 +20,14 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,
     const renderer = ({minutes, seconds,completed,api}) => {
         if (completed) {
             // Render a completed state
-  
+
+            play()
             return null
         }else if (api.isPaused() === true && pause === true){
             return <span>Paused</span>
         }
         else if(pause === true && api.isPaused() === false){
             api.pause()
-            console.log(convertTime2({minutes},{seconds}))
             task.time = convertTime2({minutes},{seconds})
             return <span>{minutes}:{seconds}</span>
         }else if(pause === false && api.isPaused() === true){
@@ -33,15 +39,27 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,
             return <span>{minutes}:{seconds}</span>;
         }
     };
+
+
     const timerOnComplete = () => {
-        onDelete(task.id)
-        setdisable(!disableAddTask) 
+        console.log(playMusic)
+        let timerLocal = setInterval(function () {
+                if(window.confirm("Finish Task")){
+                    onDelete(task.id)
+                    setdisable(!disableAddTask) 
+                    setPlayMusic(false)
+                    stop()
+                }
+            }, 3000);
+        if(playMusic === false){
+            clearInterval(timerLocal)
+        }
     }
 
     const convertTime2 = (obj1,obj2) => {
         let minutes = obj1.minutes;
         let seconds = obj2.seconds;
-        if(seconds >= 30){
+        if(seconds >= 50){
             return  minutes+1
         }else{
             return minutes+0.5
