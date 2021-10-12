@@ -1,14 +1,13 @@
 import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 import Countdown from 'react-countdown';
-import {useRef,useState} from 'react'
+import {useRef} from 'react'
 import useSound from 'use-sound';
 import boopSfx from '../sounds/music.mp3';
 
 const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,finish,setFinish}) => {
     const clockRef = useRef();
     const volume = .5;
-    const [playMusic,setPlayMusic] = useState(true);
     const [play,{stop}] = useSound(boopSfx,volume);
     
     const startTimer = () => {
@@ -20,8 +19,6 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,
     const renderer = ({minutes, seconds,completed,api}) => {
         if (completed) {
             // Render a completed state
-
-            play()
             return null
         }else if (api.isPaused() === true && pause === true){
             return <span>Paused</span>
@@ -42,17 +39,23 @@ const Task = ({task,onDelete,startTask,setdisable,disableAddTask,pause,setPause,
 
 
     const timerOnComplete = () => {
-        console.log(playMusic)
-        let timerLocal = setInterval(function () {
-                if(window.confirm("Finish Task")){
-                    onDelete(task.id)
-                    setdisable(!disableAddTask) 
-                    setPlayMusic(false)
-                    stop()
-                }
-            }, 3000);
-        if(playMusic === false){
-            clearInterval(timerLocal)
+        play();
+        taskFinish();
+    }
+
+    async function taskFinish(){
+        let myResponse = new Promise(function(resolve, reject){
+            let check = window.confirm("Task complete");
+            setTimeout(function(){
+                if(check)resolve("complete"); 
+            },3000)
+        }) 
+
+        let check2 = await myResponse;
+        if(check2 === "complete"){
+            stop();
+            onDelete(task.id);
+            setdisable(!disableAddTask); 
         }
     }
 
